@@ -1,0 +1,34 @@
+#include<iostream>
+using namespace std;
+int isSorted(int *arr, int size){
+
+    if(size==0 || size==1)
+        return true;
+
+    if(arr[0]>arr[1])
+        return false;
+    else{
+        bool remainingpart = isSorted(arr+1, size-1 );
+        return remainingpart;
+
+    }
+}
+
+
+
+int main(){
+int arr[5]={1,2,3,9,7};
+int size = 5 ;
+bool ans = isSorted(arr, size);
+
+if(ans){
+    cout<<"array is sorted";
+
+}
+else{
+    cout<<"array not sorted";
+}
+
+return 0;
+}
+
