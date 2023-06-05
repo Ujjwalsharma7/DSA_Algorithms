@@ -1,17 +1,17 @@
 #include<iostream>
 using namespace std;
-bool binarySearch(int *arr,int size, int s, int e, int key){
+int binarySearch(int *arr,int size, int s, int e, int key){
    int mid = (s+e)/2;
 
     if(size==0){
-      return false;
+      return -1;
     }
       
     
    
 
     if(arr[mid]==key){
-        return true;
+        return mid;
     }
     else if(key>arr[mid]){
         int remainingpart = binarySearch(arr,size/2,(mid+1), e, key);
@@ -27,15 +27,11 @@ bool binarySearch(int *arr,int size, int s, int e, int key){
 
 
 int main(){
-int arr[5]={1,2,3,9,7};
+int arr[5]={1,2,3,7,9};
 int size = 5 ;
-int key = 0;
+int key = 9;
 int ans = binarySearch(arr, size ,0, 4 ,key);
-if(ans){
-    cout<<"found";
-}else{
-    cout<<"not found";
-}
+cout<<ans;
 
 
 
