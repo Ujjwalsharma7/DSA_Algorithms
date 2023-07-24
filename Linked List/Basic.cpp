@@ -12,6 +12,17 @@ public:
     this -> data = data;
     this -> next = NULL;
   }
+  //destructor
+  ~Node(){
+    int value = this -> data;
+    if(this -> next != NULL){
+
+    delete next;
+    this -> next =NULL;
+    }
+    cout<< "memory is free for node with data" << value <<endl;
+  }
+  
 
 };
 
@@ -52,6 +63,30 @@ void InsertatPosition(int p, Node* &head, int d, Node* &tail){
 
 }
 
+void Deletion(int p, Node* &head){
+  if(p == 1){
+    Node* temp = head;
+    head = head->next;
+  temp -> next = NULL;
+    delete temp;
+  }
+  else{
+    Node* curr = head;
+    Node* prev = NULL;
+
+    int cnt = 1;
+    while(cnt < p){
+      prev = curr;
+      curr = curr -> next;
+      cnt++;
+    }
+    prev -> next = curr -> next;
+    curr -> next = NULL;
+    delete curr;
+     
+  }
+}
+
 void print(Node* &head){
 Node* temp = head;
 while(temp != NULL){
@@ -72,6 +107,9 @@ int main(){
     InsertAtTail(tail, 15);
     InsertatPosition(3, head , 60, tail);
     InsertatPosition(5, head, 69, tail);
+    print(head);
+    Deletion(2, head);
+    cout<<"Here we go"<<endl;
     print(head);
     return 0;
 }
