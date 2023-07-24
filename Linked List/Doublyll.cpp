@@ -41,6 +41,13 @@ class Node {
     head = temp;
  }
 
+ void inserttTail(Node* &tail, int d){
+    Node* temp = new Node(d);
+    tail -> next = temp;
+    temp -> prev = tail;
+    tail = temp;
+ }
+
 int main(){
      Node* node1 = new Node(10);
      Node* head = node1;
