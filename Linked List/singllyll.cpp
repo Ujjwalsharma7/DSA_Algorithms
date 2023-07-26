@@ -161,6 +161,41 @@ Node *findMiddleNode2(Node *&head)
   return slow;
 }
 
+// Reverse in group of k
+
+Node *Kreverse(Node *&head, int k)
+{
+
+  // base case
+  if (head == NULL || head->next == NULL)
+  {
+    return head;
+  }
+
+  // Reverse first k nodes
+  Node *next = NULL;
+  Node *curr = head;
+  Node *prev = NULL;
+  int count = 0;
+
+  while (curr != NULL || count < k)
+  {
+    next = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = next;
+    count++;
+  }
+
+  // make a recursive call for rest of the list
+  if (next != NULL)
+  {
+    head->next = Kreverse(next, k);
+  }
+
+  return prev;
+}
+
 void print(Node *&head)
 {
   Node *temp = head;
@@ -183,10 +218,12 @@ int main()
   InsertAtTail(tail, 15);
   InsertatPosition(3, head, 60, tail);
   InsertatPosition(5, head, 69, tail);
+  insertAtHeadNode(head, 1);
   print(head);
   cout << endl;
   // cout << getLength(head);
-  Node *ans = findMiddleNode2(head);
-  cout << ans->data << endl;
+  Node *ans = Kreverse(head, 1);
+  cout << endl;
+  print(ans);
   return 0;
 }
