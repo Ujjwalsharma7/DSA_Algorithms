@@ -196,6 +196,32 @@ Node *Kreverse(Node *&head, int k)
   return prev;
 }
 
+bool floydDetectLoop(Node *&head)
+{
+  if (head == NULL)
+  {
+    return false;
+  }
+  Node *slow = head;
+  Node *fast = head;
+
+  while (slow != fast && fast != NULL)
+  {
+    fast = fast->next;
+    if (fast != NULL)
+    {
+      fast = fast->next;
+    }
+    slow = slow->next;
+  }
+  if (slow == fast)
+  {
+    return true;
+  }
+
+  return false;
+}
+
 void print(Node *&head)
 {
   Node *temp = head;
