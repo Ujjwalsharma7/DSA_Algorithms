@@ -1,101 +1,138 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 class Node
 {
 public:
   int data;
-  Node* next;
-  
-  //constructor 
-  Node(int data){
-    this -> data = data;
-    this -> next = NULL;
-  }
-  //destructor
-  ~Node(){
-    int value = this -> data;
-    if(this -> next != NULL){
+  Node *next;
 
-    delete next;
-    this -> next =NULL;
+  // constructor
+  Node(int data)
+  {
+    this->data = data;
+    this->next = NULL;
+  }
+  // destructor
+  ~Node()
+  {
+    int value = this->data;
+    if (this->next != NULL)
+    {
+
+      delete next;
+      this->next = NULL;
     }
-    cout<< "memory is free for node with data" << value <<endl;
+    cout << "memory is free for node with data" << value << endl;
   }
-  
-
 };
 
-void insertNode( Node* &tail, int d, int element){
-   
-   if(tail == NULL){
-    Node* newNode = new Node(d);
+void insertNode(Node *&tail, int d, int element)
+{
+
+  if (tail == NULL)
+  {
+    Node *newNode = new Node(d);
     tail = newNode;
-    newNode -> next = newNode;
-   }
+    newNode->next = newNode;
+  }
 
-   else {
-    //assuming non empty list, element is presnt
+  else
+  {
+    // assuming non empty list, element is presnt
 
-    Node* curr = tail;
-    while(curr -> data != element){
-        curr = curr->next;
+    Node *curr = tail;
+    while (curr->data != element)
+    {
+      curr = curr->next;
     }
 
-    //element found -> curr is respresenting elemnt node
-    Node* temp = new Node(d);
-    temp -> next = curr ->next;
-    curr -> next = temp ;
-
-   }
+    // element found -> curr is respresenting elemnt node
+    Node *temp = new Node(d);
+    temp->next = curr->next;
+    curr->next = temp;
+  }
 }
 
-
-
-
-void Deletion(int p, Node* &head){
-  if(p == 1){
-    Node* temp = head;
+void Deletion(int p, Node *&head)
+{
+  if (p == 1)
+  {
+    Node *temp = head;
     head = head->next;
-  temp -> next = NULL;
+    temp->next = NULL;
     delete temp;
   }
-  else{
-    Node* curr = head;
-    Node* prev = NULL;
+  else
+  {
+    Node *curr = head;
+    Node *prev = NULL;
 
     int cnt = 1;
-    while(cnt < p){
+    while (cnt < p)
+    {
       prev = curr;
-      curr = curr -> next;
+      curr = curr->next;
       cnt++;
     }
-    prev -> next = curr -> next;
-    curr -> next = NULL;
+    prev->next = curr->next;
+    curr->next = NULL;
     delete curr;
-     
   }
 }
 
-void print(Node* &tail){
-Node* temp = tail;
-do{
-  cout<< tail -> data<< " ";
-  tail = tail ->next;
-}while (tail != temp);
+bool isCircularList(Node *&head)
+{
+  // empty list
+  if (head == NULL)
+  {
+    return true;
+  }
 
+  Node *temp = head->next;
+  while (temp != NULL && temp != head)
+  {
+    temp = temp->next;
+  }
+  if (temp == head)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
+void print(Node *&tail)
+{
+  Node *temp = tail;
+  do
+  {
+    cout << tail->data << " ";
+    tail = tail->next;
+  } while (tail != temp);
+}
 
-int main(){
+int main()
+{
 
-   Node* tail = NULL;
+  Node *tail = NULL;
 
-   insertNode(tail, 3, 5);
-   insertNode(tail, 5, 3);
-   insertNode(tail, 5, 5);
-   
-   print(tail);
-   
-   return 0;
+  insertNode(tail, 3, 5);
+  insertNode(tail, 5, 3);
+  insertNode(tail, 5, 5);
+
+  print(tail);
+
+  if (isCircularList(tail))
+  {
+    cout << "list is circular" << endl;
+  }
+  else
+  {
+    cout << "list is not circular" << endl;
+  }
+
+  return 0;
 }
