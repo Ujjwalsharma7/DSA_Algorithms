@@ -114,9 +114,17 @@ void inorder(node *root)
     cout << root->data << " ";
     inorder(root->right);
 }
-// void preorder(node* root){
+void preorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
 
-// }
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
 
 int main()
 {
@@ -128,7 +136,8 @@ int main()
     // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
 
     // reverseLevelOrder(root);
-    inorder(root);
+    // inorder(root);
+    preorder(root);
 
     return 0;
 }
