@@ -103,6 +103,21 @@ void reverseLevelOrder(node *root)
     }
 }
 
+void inorder(node *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+
+    inorder(root->left);
+    cout << root->data << " ";
+    inorder(root->right);
+}
+// void preorder(node* root){
+
+// }
+
 int main()
 {
     node *root = NULL;
@@ -110,8 +125,10 @@ int main()
     // creating a TREE
     root = buildtree(root);
     // levelOrderTraversal(root);
+    // 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
 
-    reverseLevelOrder(root);
+    // reverseLevelOrder(root);
+    inorder(root);
 
     return 0;
 }
